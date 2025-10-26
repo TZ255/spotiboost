@@ -1,0 +1,64 @@
+<section class="py-4">
+  <div class="d-flex justify-content-start mb-2">
+    <a class="btn btn-sm btn-outline-secondary" href="/dashboard"><i class="fa-solid fa-arrow-left me-1"></i> Rudi Dashibodi</a>
+  </div>
+  <div class="row g-3">
+    <div class="col-lg-6">
+      <div class="card sb-card">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center mb-3">
+            <span class="sb-hero-icon sb-hero-success me-2"><i class="fa-solid fa-circle-plus"></i></span>
+            <h1 class="h5 mb-0">Ongeza Salio</h1>
+          </div>
+          <div class="mb-3">Salio la sasa: <span id="balance-amount">TZS <%= Number((user && user.balance) || 0).toLocaleString('en-US') %></span></div>
+          <form action="/dashboard/add-funds" method="post" class="sb-form" hx-boost="true">
+            <div class="mb-3">
+              <label class="form-label" for="amount">Kiasi (TZS)</label>
+              <input type="number" class="form-control" id="amount" name="amount" min="1" required>
+              <div class="form-text">Mfano tu: malipo halisi yataongezwa baadaye.</div>
+            </div>
+            <div class="d-flex justify-content-end gap-2">
+              <button class="btn btn-success" type="submit"><i class="fa-solid fa-plus me-1"></i> Ongeza</button>
+              <button class="btn btn-outline-secondary" type="button"
+                      hx-post="/api/funds" hx-include="#amount" hx-target="#balance-amount" hx-swap="innerHTML">
+                Jaribu HTMX
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card sb-card">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center mb-3">
+            <span class="sb-hero-icon sb-hero-primary me-2"><i class="fa-solid fa-receipt"></i></span>
+            <h2 class="h6 mb-0">Muamala 10 ya Mwisho</h2>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-sm align-middle mb-0">
+              <thead>
+                <tr><th>Tarehe</th><th>Aina</th><th>Kiasi</th></tr>
+              </thead>
+              <tbody>
+                <% if (!transactions || transactions.length === 0) { %>
+                  <tr><td colspan="5" class="text-center text-muted">Hakuna miamala bado.</td></tr>
+                <% } else { %>
+                  <% transactions.forEach(function(t){ %>
+                    <tr>
+                      <td><%= new Date(t.createdAt).toLocaleString('en-GB') %></td>
+                      <td>
+                        <span class="badge bg-<%= t.type === 'credit' ? 'success' : 'danger' %>"><%= t.type %></span>
+                      </td>
+                      <td>TZS <%= Number(t.amount).toLocaleString('en-US') %></td>
+                    </tr>
+                  <% }) %>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

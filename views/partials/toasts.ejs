@@ -1,0 +1,55 @@
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1080">
+  <% (flash && Array.isArray(flash.error) ? flash.error : []).forEach(function(msg, i){ %>
+    <div class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+      <div class="d-flex">
+        <div class="toast-body">
+          <i class="fa-solid fa-circle-exclamation me-2"></i> <%= msg %>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Funga"></button>
+      </div>
+    </div>
+  <% }) %>
+
+  <% (flash && Array.isArray(flash.success) ? flash.success : []).forEach(function(msg){ %>
+    <div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="polite" aria-atomic="true" data-bs-delay="4000">
+      <div class="d-flex">
+        <div class="toast-body">
+          <i class="fa-solid fa-circle-check me-2"></i> <%= msg %>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Funga"></button>
+      </div>
+    </div>
+  <% }) %>
+
+  <% (flash && Array.isArray(flash.info) ? flash.info : []).forEach(function(msg){ %>
+    <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="polite" aria-atomic="true" data-bs-delay="4000">
+      <div class="d-flex">
+        <div class="toast-body">
+          <i class="fa-solid fa-circle-info me-2"></i> <%= msg %>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Funga"></button>
+      </div>
+    </div>
+  <% }) %>
+
+  <% (flash && Array.isArray(flash.warning) ? flash.warning : []).forEach(function(msg){ %>
+    <div class="toast align-items-center text-dark bg-warning border-0" role="alert" aria-live="polite" aria-atomic="true" data-bs-delay="4500">
+      <div class="d-flex">
+        <div class="toast-body">
+          <i class="fa-solid fa-triangle-exclamation me-2"></i> <%= msg %>
+        </div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Funga"></button>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.toast');
+    els.forEach(function(el){
+      try { new bootstrap.Toast(el).show(); } catch(e) {}
+    });
+  })();
+  </script>
+

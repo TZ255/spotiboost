@@ -1,0 +1,141 @@
+<section class="py-4">
+  <div class="row g-3">
+    <div class="col-12">
+      <div class="card sb-card">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center mb-2">
+            <span class="sb-hero-icon sb-hero-primary me-2"><i class="fa-solid fa-gauge"></i></span>
+            <h1 class="h5 mb-0">Karibu, <%= (user && user.name) || 'Mtumiaji' %></h1>
+          </div>
+          <p class="text-muted">Muhtasari wa akaunti yako.</p>
+          <div class="row g-3">
+            <!-- Balance card -->
+            <div class="col-md-3">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <strong>Salio</strong>
+                    <i class="fa-solid fa-wallet text-primary"></i>
+                  </div>
+                  <div class="h5 mb-2">TZS <%= Number((user && user.balance) || 0).toLocaleString('en-US') %></div>
+                  <a class="btn btn-sm btn-success" href="/dashboard/add-funds"><i class="fa-solid fa-circle-plus me-1"></i> Ongeza Salio</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Total orders + CTA -->
+            <div class="col-md-3">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="text-muted small">Jumla ya Oda</div>
+                  <div class="h5 mb-2"><%= Number(totalOrders || 0).toLocaleString('en-US') %></div>
+                  <a class="btn btn-sm btn-primary" href="/dashboard/new-order"><i class="fa-solid fa-plus me-1"></i> Oda Mpya</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Processing -->
+            <div class="col-md-2">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="text-muted small">Inachakatwa</div>
+                  <div class="h5 mb-0"><%= Number(processingCount || 0).toLocaleString('en-US') %></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pending -->
+            <div class="col-md-2">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="text-muted small">Inasubiri</div>
+                  <div class="h5 mb-0"><%= Number(pendingCount || 0).toLocaleString('en-US') %></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Completed -->
+            <div class="col-md-2">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="text-muted small">Imekamilika</div>
+                  <div class="h5 mb-0"><%= Number(completedCount || 0).toLocaleString('en-US') %></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent orders table -->
+            <div class="col-12">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <strong>Oda za Karibuni</strong>
+                    <a class="small" href="/dashboard/orders">Tazama zote</a>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-sm align-middle mb-0">
+                      <thead>
+                        <tr><th>Tarehe</th><th>Huduma</th><th>Kiasi</th><th>Hali</th></tr>
+                      </thead>
+                      <tbody>
+                        <% if (!recentOrders || recentOrders.length === 0) { %>
+                          <tr><td colspan="4" class="text-muted text-center">Hakuna bado.</td></tr>
+                        <% } else { %>
+                          <% recentOrders.forEach(function(o){ %>
+                            <tr>
+                              <td><%= new Date(o.createdAt).toLocaleDateString('en-GB') %></td>
+                              <td><%= (o.serviceId && o.serviceId.name) || '-' %></td>
+                              <td><%= o.quantity %></td>
+                              <td>
+                                <% const m = { pending: 'secondary', processing: 'info', completed: 'success', failed: 'danger' };
+                                   const cls = m[o.status] || 'secondary'; %>
+                                <span class="badge bg-<%= cls %>"><%= o.status %></span>
+                              </td>
+                            </tr>
+                          <% }) %>
+                        <% } %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Service ads/promo cards -->
+            <div class="col-12">
+              <div class="row g-3 mt-1">
+                <div class="col-md-4">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center mb-2"><i class="fa-brands fa-instagram text-primary me-2"></i><strong>Instagram</strong></div>
+                      <div class="text-muted small mb-2">Wafuasi & Likes kwa ukuaji wa haraka.</div>
+                      <a class="btn btn-sm btn-outline-primary" href="/dashboard/new-order">Anza Sasa</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center mb-2"><i class="fa-brands fa-tiktok text-primary me-2"></i><strong>TikTok</strong></div>
+                      <div class="text-muted small mb-2">Wafuasi & Likes kuongeza mwonekano.</div>
+                      <a class="btn btn-sm btn-outline-primary" href="/dashboard/new-order">Anza Sasa</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <div class="d-flex align-items-center mb-2"><i class="fa-brands fa-youtube text-primary me-2"></i><strong>YouTube</strong></div>
+                      <div class="text-muted small mb-2">Subscribers & Views kwa chaneli imara.</div>
+                      <a class="btn btn-sm btn-outline-primary" href="/dashboard/new-order">Anza Sasa</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

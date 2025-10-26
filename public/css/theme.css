@@ -1,0 +1,124 @@
+/* Spoti Boost Theme Tokens and Bootstrap mappings */
+
+:root {
+  /* Colors */
+  --sb-primary: #0d6efd;
+  --sb-secondary: #6c757d;
+  --sb-success: #198754;
+  --sb-warning: #ffc107;
+  --sb-danger: #dc3545;
+  --sb-info: #0dcaf0;
+  --sb-bg: #f8f9fa;
+  --sb-surface: #ffffff;
+  --sb-text: #212529;
+  --sb-muted: #6c757d;
+
+  /* Radii */
+  --sb-radius-sm: 0.25rem;
+  --sb-radius: 0.5rem;
+  --sb-radius-lg: 0.75rem;
+
+  /* Spacing (4/8 rule) */
+  --sb-space-1: 0.25rem;
+  --sb-space-2: 0.5rem;
+  --sb-space-3: 0.75rem;
+  --sb-space-4: 1rem;
+  --sb-space-6: 1.5rem;
+  --sb-space-8: 2rem;
+
+  /* Shadows */
+  --sb-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --sb-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --sb-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* Bootstrap variable mapping */
+  --bs-primary: var(--sb-primary);
+  --bs-secondary: var(--sb-secondary);
+  --bs-success: var(--sb-success);
+  --bs-warning: var(--sb-warning);
+  --bs-danger: var(--sb-danger);
+  --bs-info: var(--sb-info);
+  --bs-body-bg: var(--sb-bg);
+  --bs-body-color: var(--sb-text);
+}
+
+/* Base */
+body {
+  background-color: var(--sb-bg);
+  color: var(--sb-text);
+}
+
+a {
+  text-decoration-skip-ink: auto;
+}
+
+/* Cards */
+.card {
+  background: var(--sb-surface);
+  border-radius: var(--sb-radius);
+  box-shadow: var(--sb-shadow-sm);
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--sb-shadow);
+}
+
+/* Spoti Boost components */
+.sb-card {
+  border-radius: var(--sb-radius-lg);
+  box-shadow: var(--sb-shadow);
+}
+
+.sb-auth {
+  min-height: 70vh;
+}
+
+.sb-hero-icon {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: var(--sb-shadow-sm);
+}
+.sb-hero-primary { background: rgba(13,110,253,0.12); color: var(--sb-primary); }
+.sb-hero-success { background: rgba(25,135,84,0.12); color: var(--sb-success); }
+.sb-hero-warning { background: rgba(255,193,7,0.2); color: #664d03; }
+
+.sb-input-group .input-group-text {
+  background: var(--sb-surface);
+  border-right: 0;
+}
+.sb-input-group .form-control {
+  border-left: 0;
+}
+.sb-input-group .form-control:focus{
+  box-shadow: 0 0 0 .2rem rgba(13,110,253,.15);
+}
+
+.sb-form-help { color: var(--sb-muted); font-size: .875rem; }
+
+.sb-navbar-cta .btn { padding-top: .35rem; padding-bottom: .35rem; }
+
+/* Status badges (soft) */
+.badge-soft-secondary { background-color: rgba(108, 117, 125, 0.15); color: var(--sb-secondary); }
+.badge-soft-info { background-color: rgba(13, 202, 240, 0.15); color: var(--sb-info); }
+.badge-soft-success { background-color: rgba(25, 135, 84, 0.15); color: var(--sb-success); }
+.badge-soft-danger { background-color: rgba(220, 53, 69, 0.15); color: var(--sb-danger); }
+
+/* Tables */
+.table-responsive { overflow-x: auto; }
+
+/* Optional dark mode scaffold */
+[data-theme="dark"] {
+  --sb-bg: #0b0c0f;
+  --sb-surface: #14161a;
+  --sb-text: #e9ecef;
+  --sb-muted: #a6adbb;
+
+  /* Map to Bootstrap in dark */
+  --bs-body-bg: var(--sb-bg);
+  --bs-body-color: var(--sb-text);
+}

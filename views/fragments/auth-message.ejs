@@ -1,0 +1,13 @@
+<% if (Array.isArray(messages) && messages.length) { %>
+  <div class="alert alert-<%= kind === 'danger' ? 'danger' : kind || 'info' %>" role="alert">
+    <% if (messages.length === 1) { %>
+      <%= messages[0] %>
+    <% } else { %>
+      <ul class="mb-0">
+        <% messages.forEach(function(m){ %>
+          <li><%= m %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </div>
+<% } %>

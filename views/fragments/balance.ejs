@@ -1,0 +1,6 @@
+<% if (error) { %>
+  <span class="text-danger"><%= error %></span>
+<% } else { %>
+  TZS <%= Number(balance || 0).toLocaleString('en-US') %>
+<% } %>
+

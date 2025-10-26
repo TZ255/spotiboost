@@ -1,0 +1,44 @@
+<section class="py-4">
+  <div class="d-flex justify-content-start mb-2">
+    <a class="btn btn-sm btn-outline-secondary" href="/dashboard"><i class="fa-solid fa-arrow-left me-1"></i> Dashibodi</a>
+  </div>
+  <div class="d-flex align-items-center mb-3">
+    <span class="sb-hero-icon sb-hero-primary me-2"><i class="fa-solid fa-list"></i></span>
+    <h1 class="h5 mb-0">Huduma Zilizo Hai</h1>
+  </div>
+
+  <div class="card sb-card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead>
+            <tr>
+              <th>Jina</th>
+              <th>Aina</th>
+              <th>Maelezo</th>
+              <th>Bei kwa Kila Moja</th>
+              <th>Min</th>
+              <th>Max</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (!services || services.length === 0) { %>
+              <tr><td colspan="6" class="text-center text-muted">Hakuna huduma kwa sasa.</td></tr>
+            <% } else { %>
+              <% services.forEach(function(s){ %>
+                <tr>
+                  <td><strong><%= s.name %></strong></td>
+                  <td><span class="badge bg-secondary"><%= s.category %></span></td>
+                  <td class="text-muted"><%= s.description || '-' %></td>
+                  <td>TZS <%= Number(s.pricePerUnit).toLocaleString('en-US') %></td>
+                  <td><%= s.min %></td>
+                  <td><%= s.max %></td>
+                </tr>
+              <% }) %>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

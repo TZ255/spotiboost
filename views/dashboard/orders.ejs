@@ -1,0 +1,51 @@
+<section class="py-4">
+  <div class="d-flex justify-content-start mb-2">
+    <a class="btn btn-sm btn-outline-secondary" href="/dashboard"><i class="fa-solid fa-arrow-left me-1"></i> Dashibodi</a>
+  </div>
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <div class="d-flex align-items-center">
+      <span class="sb-hero-icon sb-hero-primary me-2"><i class="fa-solid fa-clipboard-list"></i></span>
+      <h1 class="h5 mb-0">Oda Zangu</h1>
+    </div>
+    <a class="btn btn-sm btn-primary" href="/dashboard/new-order"><i class="fa-solid fa-plus me-1"></i> Oda Mpya</a>
+  </div>
+
+  <div class="card sb-card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle" id="orders-table">
+          <thead>
+            <tr>
+              <th>Tarehe</th>
+              <th>Huduma</th>
+              <th>Kiasi</th>
+              <th>Bei</th>
+              <th>Hali</th>
+              <th>Kiungo</th>
+            </tr>
+          </thead>
+          <tbody id="orders-body">
+            <% if (!orders || orders.length === 0) { %>
+              <tr><td colspan="6" class="text-center text-muted">Bado huna oda.</td></tr>
+            <% } else { %>
+              <% orders.forEach(function(o){ %>
+                <tr>
+                  <td><%= new Date(o.createdAt).toLocaleDateString('en-GB') %></td>
+                  <td><%= (o.serviceId && o.serviceId.name) || '-' %></td>
+                  <td><%= o.quantity %></td>
+                  <td>TZS <%= Number(o.price).toLocaleString('en-US') %></td>
+                  <td>
+                    <% const m = { pending: 'secondary', processing: 'info', completed: 'success', failed: 'danger' };
+                       const cls = m[o.status] || 'secondary'; %>
+                    <span class="badge bg-<%= cls %>"><%= o.status %></span>
+                  </td>
+                  <td><a href="<%= o.link %>" target="_blank" rel="noopener">Fungua</a></td>
+                </tr>
+              <% }) %>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

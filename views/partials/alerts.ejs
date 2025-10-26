@@ -1,0 +1,15 @@
+<% if (typeof flash !== 'undefined') { %>
+  <div class="container mt-3">
+    <% ['success','error','info','warning'].forEach(function(kind){
+         const msgs = (flash && flash[kind]) || [];
+         if (!Array.isArray(msgs)) return;
+         msgs.forEach(function(msg){ %>
+           <div class="alert alert-<%= kind === 'error' ? 'danger' : kind %> alert-dismissible fade show" role="alert">
+             <%= msg %>
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Funga"></button>
+           </div>
+    <%   });
+       }); %>
+  </div>
+<% } %>
+

@@ -1,0 +1,58 @@
+<section class="py-4">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="h5 mb-0">Admin • Orders</h1>
+    <form class="d-flex align-items-center" method="get">
+      <label class="me-2 small text-muted">Status</label>
+      <select name="status" class="form-select form-select-sm me-2" onchange="this.form.submit()">
+        <option value="pending" <%= status==='pending'?'selected':'' %>>pending</option>
+        <option value="processing" <%= status==='processing'?'selected':'' %>>processing</option>
+        <option value="completed" <%= status==='completed'?'selected':'' %>>completed</option>
+        <option value="failed" <%= status==='failed'?'selected':'' %>>failed</option>
+        <option value="all" <%= status==='all'?'selected':'' %>>all</option>
+      </select>
+    </form>
+  </div>
+
+  <div class="card sb-card"><div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead><tr><th>Date</th><th>User</th><th>Service</th><th>Qty</th><th>Price</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
+          <% if (!orders || orders.length === 0) { %>
+            <tr><td colspan="7" class="text-center text-muted">No data.</td></tr>
+          <% } else { %>
+            <% orders.forEach(function(o){ %>
+              <tr>
+                <td><%= new Date(o.createdAt).toLocaleString('en-GB') %></td>
+                <td><%= (o.userId && (o.userId.name + ' • ' + o.userId.email)) || '-' %></td>
+                <td><%= (o.serviceId && o.serviceId.name) || '-' %></td>
+                <td><%= o.quantity %></td>
+                <td>TZS <%= Number(o.price).toLocaleString('en-US') %></td>
+                <td>
+                  <% const m = { pending: 'secondary', processing: 'info', completed: 'success', failed: 'danger' };
+                     const cls = m[o.status] || 'secondary'; %>
+                  <span class="badge bg-<%= cls %>"><%= o.status %></span>
+                </td>
+                <td>
+                  <form action="/admin/orders/<%= o._id %>/status" method="post" class="d-inline">
+                    <select name="status" class="form-select form-select-sm d-inline-block w-auto me-2">
+                      <option value="pending" <%= o.status==='pending'?'selected':'' %>>pending</option>
+                      <option value="processing" <%= o.status==='processing'?'selected':'' %>>processing</option>
+                      <option value="completed" <%= o.status==='completed'?'selected':'' %>>completed</option>
+                      <option value="failed" <%= o.status==='failed'?'selected':'' %>>failed</option>
+                    </select>
+                    <div class="form-check form-check-inline align-middle me-2">
+                      <input class="form-check-input" type="checkbox" name="refund" id="refund-<%= o._id %>">
+                      <label class="form-check-label small" for="refund-<%= o._id %>">Refund</label>
+                    </div>
+                    <button class="btn btn-sm btn-outline-secondary" type="submit">Update</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+</section>

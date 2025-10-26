@@ -1,0 +1,33 @@
+{
+  "name": "spotiboost",
+  "version": "1.0.0",
+  "description": "Tanzania SMM Panel",
+  "main": "index.js",
+  "scripts": {
+    "sync:docs": "node scripts/sync-docs.js",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "author": "TZ255",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "bcryptjs": "^3.0.2",
+    "compression": "^1.8.1",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.18.2",
+    "htmx.org": "^2.0.8",
+    "mongoose": "^8.19.2",
+    "morgan": "^1.10.1",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

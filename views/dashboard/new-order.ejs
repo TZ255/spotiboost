@@ -1,0 +1,94 @@
+<section class="py-4">
+  <div class="d-flex justify-content-start mb-2">
+    <a class="btn btn-sm btn-outline-secondary" href="/dashboard"><i class="fa-solid fa-arrow-left me-1"></i> Rudi
+      Dashibodi</a>
+  </div>
+  <div class="row g-3">
+    <div class="col-lg-8">
+      <div class="card sb-card">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-center mb-3">
+            <span class="sb-hero-icon sb-hero-primary me-2"><i class="fa-solid fa-cart-plus"></i></span>
+            <h1 class="h5 mb-0">Weka Oda Mpya</h1>
+          </div>
+          <form action="/dashboard/new-order" method="post" class="sb-form" hx-boost="true">
+            <div class="mb-3">
+              <label class="form-label" for="category">Kategoria</label>
+              <select id="category" name="category" class="form-select" hx-get="/api/services" hx-target="#serviceId"
+                hx-swap="innerHTML">
+                <option value="" selected disabled>— Chagua kategoria —</option>
+                <% (categories||[]).forEach(function(c){ %>
+                <option value="<%= c %>"><%= c %></option>
+                <% }) %>
+              </select>
+              <div class="form-text">Chagua kategoria ya huduma.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="serviceId">Huduma</label>
+              <select id="serviceId" name="serviceId" class="form-select" required>
+                <option value="" selected disabled>— Chagua huduma —</option>
+                <% (services||[]).forEach(function(s){ %>
+                <option value="<%= s._id %>" data-price="<%= s.pricePerUnit %>" data-min="<%= s.min %>"
+                  data-max="<%= s.max %>"><%= s.name %> • TZS <%= Number(s.pricePerUnit).toLocaleString('en-US') %>
+                </option>
+                <% }) %>
+              </select>
+              <div class="form-text">Chagua huduma unayotaka kuagiza. <span id="rangeHelp" class="ms-1"></span></div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="quantity">Kiasi</label>
+              <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
+              <div class="form-text">Ingiza idadi inayohitajika.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="link">Kiungo</label>
+              <input type="url" class="form-control" id="link" name="link" placeholder="https://" required>
+            </div>
+            <div id="price" class="mb-3 small text-muted">Chagua huduma na kiasi kuona jumla.</div>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane me-1"></i> Weka
+                Oda</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card sb-card">
+        <div class="card-body">
+          <h2 class="h6">Muhtasari</h2>
+          <div>Salio: <span id="balance">TZS <%= Number((user && user.balance) || 0).toLocaleString('en-US') %></span>
+          </div>
+          <div class="text-muted small">Hakikisha salio linatosha kukamilisha oda.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var serviceEl = document.getElementById('serviceId');
+    var qtyEl = document.getElementById('quantity');
+    var priceEl = document.getElementById('price');
+    var rangeHelp = document.getElementById('rangeHelp');
+    function update() {
+      var opt = serviceEl && serviceEl.options[serviceEl.selectedIndex];
+      var qty = Number(qtyEl && qtyEl.value);
+      if (!opt || !opt.dataset) { priceEl.textContent = 'Chagua huduma na kiasi kuona jumla.'; if (rangeHelp) rangeHelp.textContent = ''; return; }
+      var ppu = Number(opt.dataset.price || 0);
+      var min = Number(opt.dataset.min || 0);
+      var max = Number(opt.dataset.max || 0);
+      if (rangeHelp) rangeHelp.textContent = min && max ? '(Kiasi: ' + min + '–' + max + ')' : '';
+      if (!qty || !ppu) { priceEl.textContent = 'Ingiza kiasi ili kuhesabu jumla.'; return; }
+      if ((min && qty < min) || (max && qty > max)) {
+        priceEl.innerHTML = '<span class="text-danger">Kiasi lazima kiwe kati ya ' + min + ' na ' + max + '.</span>';
+        return;
+      }
+      var total = qty * ppu;
+      priceEl.innerHTML = '<div><strong>Jumla:</strong> TZS ' + total.toLocaleString('en-US') + '</div>';
+    }
+    if (serviceEl) serviceEl.addEventListener('change', update);
+    if (qtyEl) qtyEl.addEventListener('input', update);
+  })();
+</script>

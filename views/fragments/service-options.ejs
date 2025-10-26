@@ -1,0 +1,5 @@
+<option value="" selected disabled>— Chagua huduma —</option>
+<% (services||[]).forEach(function(s){ %>
+  <option value="<%= s._id %>" data-price="<%= s.pricePerUnit %>" data-min="<%= s.min %>" data-max="<%= s.max %>"><%= s.name %> • TZS <%= Number(s.pricePerUnit).toLocaleString('en-US') %></option>
+<% }) %>
+

@@ -1,0 +1,43 @@
+<section class="py-4">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="h5 mb-0">Admin • Users</h1>
+  </div>
+  <div class="card sb-card"><div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Balance</th><th>Change Role</th><th>Credit/Debit</th></tr></thead>
+        <tbody>
+          <% if (!users || users.length === 0) { %>
+            <tr><td colspan="6" class="text-center text-muted">No users.</td></tr>
+          <% } else { %>
+            <% users.forEach(function(u){ %>
+              <tr>
+                <td><%= u.name %></td>
+                <td class="small text-muted"><%= u.email %></td>
+                <td><span class="badge bg-<%= u.role === 'admin' ? 'primary' : 'secondary' %>"><%= u.role %></span></td>
+                <td>TZS <%= Number(u.balance || 0).toLocaleString('en-US') %></td>
+                <td>
+                  <form action="/admin/users/<%= u._id %>/role" method="post" class="d-inline">
+                    <select name="role" class="form-select form-select-sm d-inline-block w-auto me-2">
+                      <option value="user" <%= u.role==='user'?'selected':'' %>>user</option>
+                      <option value="admin" <%= u.role==='admin'?'selected':'' %>>admin</option>
+                    </select>
+                    <button class="btn btn-sm btn-outline-secondary" type="submit">Save</button>
+                  </form>
+                </td>
+                <td>
+                  <form action="/admin/users/<%= u._id %>/fund" method="post" class="d-inline">
+                    <div class="input-group input-group-sm">
+                      <input type="number" step="1" class="form-control" name="amount" placeholder="Amount +/‑" required>
+                      <button class="btn btn-success" type="submit">Update</button>
+                    </div>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+</section>

@@ -1,0 +1,19 @@
+<% if (error) { %>
+  <tr>
+    <td colspan="6" class="text-danger"><%= error %></td>
+  </tr>
+<% } else if (order) { %>
+  <tr>
+    <td><%= new Date(order.createdAt).toLocaleDateString('en-GB') %></td>
+    <td><%= (order.serviceId && order.serviceId.name) || '-' %></td>
+    <td><%= order.quantity %></td>
+    <td>TZS <%= Number(order.price).toLocaleString('en-US') %></td>
+    <td>
+      <% const m = { pending: 'secondary', processing: 'info', completed: 'success', failed: 'danger' };
+         const cls = m[order.status] || 'secondary'; %>
+      <span class="badge bg-<%= cls %>"><%= order.status %></span>
+    </td>
+    <td><a href="<%= order.link %>" target="_blank" rel="noopener">Fungua</a></td>
+  </tr>
+<% } %>
+
