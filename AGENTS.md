@@ -2,7 +2,7 @@
 
 This document refines the original brief into a clear, implementation-ready plan. It specifies structure, routes, models, environment, coding standards, and acceptance criteria to enable fast, consistent delivery by a small team or an AI agent.
 
-Last Synced: 2025-10-26T19:41:43.945Z
+Last Synced: 2025-10-27T11:23:57.272Z
 
 ## Change Discipline
 - Always update both `AGENTS.md` and `/LOGS/UPDATES.log` for every change.

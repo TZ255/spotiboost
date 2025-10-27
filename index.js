@@ -68,6 +68,7 @@ app.use('/auth', require('./routes/auth'));
 app.use('/dashboard', require('./routes/dashboard'));
 app.use('/admin', require('./routes/admin'));
 app.use('/api', require('./routes/api'));
+app.use('/blog', require('./routes/blog'));
 
 // 404 and error handlers
 const { notFound, serverError } = require('./middlewares/errorHandler');

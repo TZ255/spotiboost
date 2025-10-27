@@ -1,0 +1,38 @@
+<section class="py-4">
+  <nav aria-label="mkate wa njia" class="breadcrumb-nav mb-3">
+    <ol class="breadcrumb container">
+      <li class="breadcrumb-item"><a href="/"><i class="fa-solid fa-house"></i> Nyumbani</a></li>
+      <li class="breadcrumb-item"><a href="/blog">Blogu</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><%= (meta && meta.title) || 'Makala' %></li>
+    </ol>
+  </nav>
+  <article id="blog-post">
+    <% if (meta && meta.coverImage) { %>
+      <img src="<%= meta.coverImage %>" alt="Picha ya kifuniko" class="mb-3">
+    <% } %>
+    <header class="mb-3">
+      <h1 class="mb-1"><%= meta && meta.title %></h1>
+      <div class="text-muted small">
+        <i class="fa-regular fa-user me-1"></i> <%= meta && meta.author ? meta.author : 'Mwandishi' %>
+        <span class="ms-3"><i class="fa-regular fa-calendar me-1"></i> <%= meta && (meta.date_modified || meta.date_created) ? new Date(meta.date_modified || meta.date_created).toLocaleDateString('en-GB') : '' %></span>
+      </div>
+    </header>
+
+    <% if (toc && toc.length > 2) { %>
+      <div id="table-of-contents" class="toc-container">
+        <div class="h4 d-flex align-items-center">Yaliyomo <button id="toc-toggle" class="toc-toggle ms-2" aria-expanded="false" aria-controls="toc-list">[+]</button></div>
+        <ul id="toc-list" class="toc-list">
+          <% toc.forEach(function(item) { %>
+            <li style="padding-left: <%= (item.level - 1) * 1 %>rem;">
+              <a href="#<%= item.slug %>"><%= item.text %></a>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
+
+    <div class="blog-body">
+      <%- blog_body %>
+    </div>
+  </article>
+</section>

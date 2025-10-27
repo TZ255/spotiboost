@@ -13,9 +13,9 @@
       %>
       <ul class="navbar-nav ms-auto align-items-lg-center">
         <li class="nav-item"><a class="nav-link <%= isHome ? 'active' : '' %>" href="/">Nyumbani</a></li>
-        <li class="nav-item"><a class="nav-link <%= isBlog ? 'active' : '' %>" href="/blog">Blogu</a></li>
+        <li class="nav-item"><a class="nav-link <%= isBlog ? 'active' : '' %>" href="/blog">Blog</a></li>
         <% if (user) { %>
-          <li class="nav-item"><a class="nav-link <%= isDash ? 'active' : '' %>" href="/dashboard">Dashibodi</a></li>
+          <li class="nav-item"><a class="nav-link <%= isDash ? 'active' : '' %>" href="/dashboard">Dashboard</a></li>
           <% if (user.role === 'admin') { %>
             <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
           <% } %>

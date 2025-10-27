@@ -1,0 +1,35 @@
+<section class="py-4">
+  <div class="d-flex align-items-center mb-3">
+    <span class="sb-hero-icon sb-hero-primary me-2"><i class="fa-regular fa-newspaper"></i></span>
+    <h1 class="h5 mb-0">Makala za Hivi Karibuni</h1>
+  </div>
+  <div class="row g-3">
+    <% if (!posts || posts.length === 0) { %>
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body text-center text-muted">Hakuna makala kwa sasa.</div>
+        </div>
+      </div>
+    <% } else { %>
+      <% posts.forEach(function(p){ %>
+        <div class="col-md-6 col-lg-4">
+          <a href="/blog/<%= p.slug %>" class="sb-link-unstyled">
+            <div class="card h-100 sb-card-action">
+              <% if (p.coverImage) { %>
+                <img src="<%= p.coverImage %>" class="card-img-top" alt="Picha ya makala">
+              <% } %>
+              <div class="card-body">
+                <h2 class="h6"><%= p.title %></h2>
+                <div class="text-muted small mb-2">
+                  <i class="fa-regular fa-calendar me-1"></i>
+                  <%= p.date_modified ? new Date(p.date_modified).toLocaleDateString('en-GB') : '' %>
+                </div>
+                <p class="text-muted small mb-0"><%= (p.description || '').slice(0, 140) %>...</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+</section>
