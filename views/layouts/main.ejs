@@ -1,47 +1,59 @@
 <!doctype html>
 <html lang="sw">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title><%= title || 'Spoti Boost' %></title>
-    <meta name="description" content="<%= description || 'Spoti Boost — Paneli ya SMM kwa Tanzania.' %>">
-    <meta name="keywords" content="<%= keywords || 'smm, tanzania, huduma za mitandao, bei nafuu' %>">
-    <meta property="og:title" content="<%= title || 'Spoti Boost' %>">
-    <meta property="og:description" content="<%= description || 'Spoti Boost — Paneli ya SMM kwa Tanzania.' %>">
-    <meta property="og:type" content="website">
-    <link rel="canonical" href="<%= canonical %>">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>
+    <%= title || 'Spoti Boost' %>
+  </title>
+  <meta name="description" content="<%= description || 'Spoti Boost — Paneli ya SMM kwa Tanzania.' %>">
+  <meta name="keywords" content="<%= keywords || 'smm, tanzania, huduma za mitandao, bei nafuu' %>">
+  <meta property="og:title" content="<%= title || 'Spoti Boost' %>">
+  <meta property="og:description" content="<%= description || 'Spoti Boost — Paneli ya SMM kwa Tanzania.' %>">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="<%= canonical %>">
 
-    <!-- Theme CSS -->
-    <link href="/css/theme.css" rel="stylesheet">
-    <% if (page === 'blog' || page === 'blog-post') { %>
-      <link href="/css/blog.css" rel="stylesheet">
-    <% } %>
-  </head>
-  <body data-page="<%= page || '' %>"> 
-    <%- include('../partials/nav') %>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="SpotiBoost" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
 
-    <main class="container py-4">
-      <%- include('../partials/alerts') %>
-      <%- body %>
-    </main>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
-    <%- include('../partials/footer') %>
+  <!-- Theme CSS -->
+  <link href="/css/theme.css" rel="stylesheet">
+  <% if (page==='blog' || page==='blog-post' ) { %>
+  <link href="/css/blog.css" rel="stylesheet">
+  <% } %>
+</head>
 
-    <!-- HTMX -->
-    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- UI helpers -->
-    <script src="/js/ui.js"></script>
-    <% if (page === 'blog' || page === 'blog-post') { %>
-      <script src="/js/blog.js"></script>
-    <% } %>
-    <!-- Flash Toasts -->
-    <%- include('../partials/toasts') %>
-  </body>
-  </html>
+<body data-page="<%= page || '' %>">
+  <%- include('../partials/nav') %>
+
+  <main class="container py-4">
+    <%- include('../partials/alerts') %>
+    <%- body %>
+  </main>
+
+  <%- include('../partials/footer') %>
+
+  <!-- HTMX -->
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- UI helpers -->
+  <script src="/js/ui.js"></script>
+  <% if (page==='blog' || page==='blog-post' ) { %>
+  <script src="/js/blog.js"></script>
+  <% } %>
+  <!-- Flash Toasts -->
+  <%- include('../partials/toasts') %>
+</body>
+</html>
