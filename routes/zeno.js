@@ -5,6 +5,7 @@ const { makePayment, getTransactionStatus } = require('../utils/zenopay');
 const { ensureAuth } = require('../middlewares/authCheck');
 const User = require('../models/User');
 const Transaction = require('../models/Transaction');
+const { sendLauraNotification } = require('../utils/sendTgNotifications');
 
 // helpers
 const BASE_URL = process.env.DOMAIN;
@@ -22,8 +23,8 @@ router.post('/pay', ensureAuth, async (req, res) => {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return res.render('fragments/payments/payment-error', { layout: false, message: 'Barua pepe si sahihi. Tafadhali ingia tena.' });
     }
-    if (!Number.isFinite(amount) || amount < 500) {
-      return res.render('fragments/payments/payment-error', { layout: false, message: 'Kiasi lazima kiwe angalau TZS 100.' });
+    if (!Number.isFinite(amount) || (amount < 3000 && req.user.role !== 'admin')) {
+      return res.render('fragments/payments/payment-error', { layout: false, message: 'Kiasi lazima kiwe angalau TZS 3000.' });
     }
     // Phone: user-entered 9 digits (no leading 0); validate as Tanzanian when prefixed with 255
     if (!/^([1-9][0-9]{8})$/.test(phone9)) {
@@ -97,6 +98,7 @@ router.post('/zenopay-webhook', async (req, res) => {
         const first = Array.isArray(data) ? data[0] : (Array.isArray(data?.data) ? data.data[0] : data);
         const amountStr = first?.amount || status?.amount || 0;
         const amount = Number(amountStr) || 0;
+        const transid = first?.transid || status?.transid
         if (amount > 0) {
           const user = await User.findOne({ email: record.email });
           if (user) {
@@ -107,8 +109,9 @@ router.post('/zenopay-webhook', async (req, res) => {
               type: 'credit',
               amount,
               balanceAfter: user.balance,
-              reference: 'ZENO:' + (record.reference || 'PUSH'),
+              reference: transid || record.reference,
             });
+            sendLauraNotification(`User ${user.email} Topup successfully TSh. ${amount}`, null, false)
           }
         }
       } catch (e) {

@@ -42,7 +42,7 @@ const getTransactionStatus = async (order_id) => {
     }
 }
 
-// Example of response from getTransactionStatus
+// Example of response from getTransactionStatus res.data
 // {"reference":"0994780437","resultcode":"000","result":"SUCCESS","message":"Order fetch successful","data":[{"order_id":"ORD-mh243okd-757259678","creation_date":"2025-10-22 17:54:07","amount":"500","payment_status":"COMPLETED","transid":"CJM7KRW9AEZ","channel":"MPESA-TZ","reference":"0994780437","msisdn":"255757259678"}]}
 
 module.exports = { makePayment, getTransactionStatus }

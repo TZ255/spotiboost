@@ -1,5 +1,4 @@
 const {Bot} = require('grammy')
-const bot = new Bot(process.env.ERROR_BOT)
 const botLaura = new Bot(process.env.LAURA_TOKEN)
 
 const sendLauraNotification = async (err_msg, chatid, disable_notification = false) => {

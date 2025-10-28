@@ -22,7 +22,9 @@ app.set('layout', 'layouts/main');
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(morgan('dev'));
+if (process.env.NODE_ENV !== 'production') {
+  app.use(morgan('dev'));
+}
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 

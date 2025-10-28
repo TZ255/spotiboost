@@ -144,3 +144,7 @@ a {
   box-shadow: var(--sb-shadow-sm);
   border: 1px solid var(--bs-border-color, #dee2e6);
 }
+
+/* HTMX indicator defaults */
+.htmx-indicator { display: none; }
+.htmx-request .htmx-indicator { display: inline-block; }
