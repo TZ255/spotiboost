@@ -1,0 +1,16 @@
+<h5 id="paymentModalTitle" hx-swap-oob="true" class="modal-title">
+  <i class="fa-solid fa-triangle-exclamation me-2"></i> Hitilafu ya Malipo
+</h5>
+
+<div id="paymentModalBody" hx-swap-oob="true" class="modal-body">
+  <div class="alert alert-danger mb-0" role="alert">
+    <i class="fa-solid fa-triangle-exclamation me-2"></i>
+    <span><%= message || 'Imeshindikana kushughulikia ombi lako. Tafadhali jaribu tena.' %></span>
+  </div>
+</div>
+
+<div id="paymentModalFooter" hx-swap-oob="true" class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" onclick="window.location.reload()">
+    <i class="fa-regular fa-circle-xmark me-1"></i> Funga na Jaribu Tena
+  </button>
+</div>

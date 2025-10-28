@@ -1,0 +1,17 @@
+<!-- OOB updates to reuse the already-open modal -->
+<h5 id="paymentModalTitle" hx-swap-oob="true" class="modal-title">
+  <i class="fa-solid fa-wallet me-2"></i> Ombi la Malipo Limetumwa
+  </h5>
+
+<div id="paymentModalBody" hx-swap-oob="true" class="modal-body">
+  <p class="mb-2">Ombi la malipo limetumwa kwenye namba <strong><%= phone %></strong></p>
+  <p class="mb-2">Tafadhali thibitisha kwa kuingiza PIN yako kukamilisha deposti ya TSh <%= Number(amount).toLocaleString('en-US') %></p>
+  <div class="small text-muted">Order: <code><%= orderId %></code></div>
+  <div class="alert alert-info mt-3 mb-0"><i class="fa-regular fa-envelope me-1"></i> Utapokea barua pepe ya uthibitisho baada ya malipo kukamilika.</div>
+</div>
+
+<div id="paymentModalFooter" hx-swap-oob="true" class="modal-footer">
+  <button type="button" class="btn btn-success" onclick="window.location.reload()">
+    <i class="fa-solid fa-check me-1"></i> Nimeelewa, Funga
+  </button>
+</div>

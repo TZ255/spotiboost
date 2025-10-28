@@ -1,0 +1,14 @@
+<h5 id="paymentModalTitle" hx-swap-oob="true" class="modal-title">
+  <i class="fa-solid fa-triangle-exclamation me-2"></i> Hitilafu
+</h5>
+
+<div id="paymentModalBody" hx-swap-oob="true" class="modal-body">
+  <div class="alert alert-danger py-2 px-3 w-100 mb-0" role="alert">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <span><%= message || 'Tafadhali angalia taarifa ulizoingiza na ujaribu tena.' %></span>
+  </div>
+</div>
+
+<div id="paymentModalFooter" hx-swap-oob="true" class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Funga</button>
+</div>
